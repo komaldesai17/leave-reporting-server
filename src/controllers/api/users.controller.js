@@ -43,11 +43,9 @@ const login = async (req, res, next) => {
     const { email, password } = credentials;
     try {
         const user = await getUserByEmail(email);
-        res.cookie('email',`${user.email}`);
-        res.cookie('name',`${user.name}`);
+        res.cookie('email', `${user.email}`);
+        res.cookie('name', `${user.name}`);
         res.cookie('userId', `${user._id}`);
-
-        console.log(res.cookie)
         /*await checkPassword(user, password);
 
         if (error) {
@@ -55,12 +53,12 @@ const login = async (req, res, next) => {
             next(httpError);
         }
         */
-        
+
         res.json({
             status: 'success',
             data: {
                 name: user.name,
-                email: user.email
+                email: user.email,
             }
         })
     } catch (error) {
@@ -72,7 +70,7 @@ const login = async (req, res, next) => {
             const httpError = new HttpError("Internal Server Error", 500);
             next(httpError);
         }*/
-        throw(error)
+        throw (error)
 
     }
 };

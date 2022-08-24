@@ -20,7 +20,7 @@ const leaveSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ['annual', 'sick']
+        enum: ['Annual', 'Sick']
     },
     status: {
         type: String,
