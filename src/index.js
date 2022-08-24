@@ -1,3 +1,5 @@
+require( './init' );
+
 const express = require('express');
 var cookieParser = require('cookie-parser');
 const app = express();
@@ -9,7 +11,7 @@ app.use(cors({
     origin: `http://localhost:8081`,
     optionsSuccessStatus: 200,
     credentials: true,
-    exposedHeaders: ['set-cookie']
+    //exposedHeaders: ['set-cookie']
 }))
 const { connect } = require('./data/db');
 connect();
