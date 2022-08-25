@@ -6,7 +6,7 @@ const {
 
 const router = express.Router();
 
-router.post('/', postLeave);
+router.post('/:id', postLeave);
 router.get('/:id',getAllLeave)
 
 module.exports = router;

@@ -2,7 +2,9 @@ const LeaveService = require('../../services/leave.service')
 
 
 const postLeave = async (req, res, next) => {
-    const leave = req.body;
+    const user = req.params.id;
+
+    const leave = { user, ...req.body};
     //leave.user = req.cookies.userId;
     try {
         let updatedLeave = await LeaveService.addLeave(leave);
