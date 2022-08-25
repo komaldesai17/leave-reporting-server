@@ -1,4 +1,4 @@
-const path = require('path');
+//const path = require('path');
 const jwt = require('jsonwebtoken');
 const {
     addUser,
@@ -38,14 +38,13 @@ const login = async (req, res, next) => {
     if (!(credentials?.email && credentials?.password)) {
         const httpError = new HttpError("Bad request", 400);
         next(httpError);
-        return;
     }
     const { email, password } = credentials;
     try {
         const user = await getUserByEmail(email);
-        res.cookie('email', `${user.email}`);
-        res.cookie('role', `${user.role}`);
-        res.cookie('userId', `${user._id}`);
+        //res.cookie('email', `${user.email}`);
+        //res.cookie('role', `${user.role}`);
+        //res.cookie('userId', `${user._id}`);
         await checkPassword(user, password);
         const claims = {
             role: user.role,
@@ -53,18 +52,17 @@ const login = async (req, res, next) => {
             user: user._id, // info useful for the backend in future request
         };
 
-        // The secret key which is used to generate the digital signature must be stored in environment variable and NEVER in code
         jwt.sign(claims, process.env.JWT_SECRET, function (error, token) {
             // some problem in generating JWT
             if (error) {
                 const httpError = new HttpError("Internal Server Error", 500);
-                next(httpError);
+                next(httpError, console.log(process.env.JWT_SECRET));
             }
 
             res.json({
                 status: 'success',
                 data: {
-                    name: user.name,
+                    role: user.role,
                     email: user.email, // useful for frontend app
                     user: user._id,
                     // token: token

@@ -1,4 +1,5 @@
-require( './init' );
+require( 'dotenv' ).config();
+require('./init');
 
 const express = require('express');
 var cookieParser = require('cookie-parser');
@@ -11,7 +12,7 @@ app.use(cors({
     origin: `http://localhost:8081`,
     optionsSuccessStatus: 200,
     credentials: true,
-    //exposedHeaders: ['set-cookie']
+    exposedHeaders: ['set-cookie'],
 }))
 const { connect } = require('./data/db');
 connect();
