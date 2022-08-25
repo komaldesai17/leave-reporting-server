@@ -12,7 +12,6 @@ app.use(cors({
     origin: `http://localhost:8081`,
     optionsSuccessStatus: 200,
     credentials: true,
-    exposedHeaders: ['set-cookie'],
 }))
 const { connect } = require('./data/db');
 connect();
