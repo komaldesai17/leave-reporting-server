@@ -1,7 +1,7 @@
 const LeaveService = require('../../services/leave.service')
 
 
-const postLeave = async ( req, res, next) => {
+const postLeave = async (req, res, next) => {
     const leave = req.body;
     //leave.user = req.cookies.userId;
     try {
@@ -10,16 +10,35 @@ const postLeave = async ( req, res, next) => {
             status: 'success',
             data: updatedLeave
         });
-        
+
     }
     catch (error) {
-        const httpError = new HttpError( error.message, 400 );
+        const httpError = new HttpError(error.message, 400);
 
-        next( httpError );        
+        next(httpError);
     }
 }
 
+const getAllLeave = async (req, res, next) => {
+    const leave = req.params.id;
+    try {
+        const leaves = await LeaveService.getAllLeave(leave);
+        res.status(201).json({
+            status: 'success',
+            data: leaves
+        });
 
-module.exports={
-    postLeave
+    }
+    catch (error) {
+        const httpError = new HttpError(error.message, 400);
+
+        next(httpError);
+    }
+
+}
+
+
+module.exports = {
+    postLeave,
+    getAllLeave
 }

@@ -1,10 +1,12 @@
 const express = require('express');
 const {
-    postLeave
+    postLeave,
+    getAllLeave
 } = require('../../controllers/api/leave.controller');
 
 const router = express.Router();
 
 router.post('/', postLeave);
+router.get('/:id',getAllLeave)
 
 module.exports = router;
