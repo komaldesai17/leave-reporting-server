@@ -14,19 +14,38 @@ const addLeave = async (leave) => {
     }
 }
 
-const getAllLeave = async (userId) => {
+const getAllLeave = async (userId, sortField, v) => {
 
     let user;
     try {
-        user = await User.findById(userId);
+        user = await User.findById(userId, sortField);
+        if (user) {
+            const query = await Leave.find({
+                user: userId
+            });
 
+            if (sortField) {
+
+                const leaves = await Leave.find({
+                    user: userId,
+                    status: sortField
+                });
+                console.log(leaves)
+                return leaves;
+            }
+            return query;
+
+        }
+
+        /*user = await User.findById(userId);
+ 
         if (user) {
             const leaves = await Leave.find({
                 user: userId
             });
             return leaves;
-        }
-       
+        }*/
+
     } catch (error) {
         if (error.name === 'CastError') {
             const dbError = new Error(`Data type error : ${error.message}`);
