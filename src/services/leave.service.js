@@ -60,8 +60,29 @@ const deleteLeave = async (id) => {
     return deletedLeave;
 }
 
+
+const changestatus = async (id, status) => {
+    try {
+        const updatedStatus = await Leave.findByIdAndUpdate(id, { status: status });
+
+        return updatedStatus;
+    } catch (error) {
+        if (error.name === "CastError") {
+            const dbError = new Error(`Data type error : ${error.message}`);
+            dbError.type = "CastError";
+            throw dbError;
+        } else if (error.name === "ValidationError") {
+            const dbError = new Error(`Validation error : ${error.message}`);
+            dbError.type = "ValidationError";
+            throw dbError;
+        } else {
+            throw error;
+        }
+    }
+}
+
 module.exports = {
     addLeave,
     getAllLeave,
-    deleteLeave
+    changestatus
 }
