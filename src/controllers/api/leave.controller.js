@@ -21,7 +21,7 @@ const postLeave = async (req, res, next) => {
 
 const changeStatus = async (req, res, next) => {
     const leave = req.params.id;
-    let { edit: status } = req.query
+    const status = req.body
     try {
         const leaves = await LeaveService.changestatus(leave, status);
         res.status(201).json({

@@ -63,7 +63,7 @@ const deleteLeave = async (id) => {
 
 const changestatus = async (id, status) => {
     try {
-        const updatedStatus = await Leave.findByIdAndUpdate(id, { status: status });
+        const updatedStatus = await Leave.findByIdAndUpdate(id, status);
 
         return updatedStatus;
     } catch (error) {
