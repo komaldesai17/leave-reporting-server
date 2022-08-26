@@ -3,7 +3,6 @@ const User = mongoose.model("User")
 const Leave = mongoose.model("Leave");
 
 
-
 const addLeave = async (leave) => {
     try {
         const insertedHoliday = await Leave.create(leave);
@@ -14,7 +13,7 @@ const addLeave = async (leave) => {
     }
 }
 
-const getAllLeave = async (userId, sortField, v) => {
+const getAllLeave = async (userId, sortField) => {
 
     let user;
     try {
@@ -30,21 +29,11 @@ const getAllLeave = async (userId, sortField, v) => {
                     user: userId,
                     status: sortField
                 });
-                console.log(leaves)
                 return leaves;
             }
             return query;
 
         }
-
-        /*user = await User.findById(userId);
- 
-        if (user) {
-            const leaves = await Leave.find({
-                user: userId
-            });
-            return leaves;
-        }*/
 
     } catch (error) {
         if (error.name === 'CastError') {
@@ -60,7 +49,19 @@ const getAllLeave = async (userId, sortField, v) => {
     }
 };
 
+const deleteLeave = async (id) => {
+    const deletedLeave = await Leave.findByIdAndRemove(id);
+    if (deletedLeave === null) {
+        const error = new Error("No such workshop");
+        error.type = "NotFound";
+        throw error;
+    }
+
+    return deletedLeave;
+}
+
 module.exports = {
     addLeave,
-    getAllLeave
+    getAllLeave,
+    deleteLeave
 }

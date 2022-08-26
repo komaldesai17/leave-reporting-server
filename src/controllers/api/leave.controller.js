@@ -38,8 +38,24 @@ const getAllLeave = async (req, res, next) => {
 
 }
 
+const deletLeave = async (req, res, next) => {
+    const id = req.params.id;
+
+    try {
+        await LeaveService.deleteLeave(id)
+        res.json({
+            status: 'success'
+        });
+    } catch (error) {
+        const httpError = new HttpError(error.message, 404);
+
+        next(httpError);
+    }
+}
+
 
 module.exports = {
     postLeave,
-    getAllLeave
+    getAllLeave,
+    deletLeave
 }
