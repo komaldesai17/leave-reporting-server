@@ -13,6 +13,35 @@ const addLeave = async (leave) => {
     }
 }
 
+const getLeaves = async (sortField) => {
+    try {
+        const leaves = await Leave.find();
+
+        if (sortField) {
+
+            const leaves = await Leave.find({
+                status: sortField
+            });
+            return leaves;
+        }
+        return leaves
+
+    }
+    catch (error) {
+        if (error.name === "CastError") {
+            const dbError = new Error(`Data type error : ${error.message}`);
+            dbError.type = "CastError";
+            throw dbError;
+        } else if (error.name === "ValidationError") {
+            const dbError = new Error(`Validation error : ${error.message}`);
+            dbError.type = "ValidationError";
+            throw dbError;
+        } else {
+            throw error;
+        }
+    }
+}
+
 const getAllLeave = async (userId, sortField) => {
 
     let user;
@@ -52,7 +81,7 @@ const getAllLeave = async (userId, sortField) => {
 const deleteLeave = async (id) => {
     const deletedLeave = await Leave.findByIdAndRemove(id);
     if (deletedLeave === null) {
-        const error = new Error("No such workshop");
+        const error = new Error("No such leave");
         error.type = "NotFound";
         throw error;
     }
@@ -84,5 +113,7 @@ const changestatus = async (id, status) => {
 module.exports = {
     addLeave,
     getAllLeave,
-    changestatus
+    changestatus,
+    deleteLeave,
+    getLeaves
 }

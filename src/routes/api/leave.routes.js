@@ -3,14 +3,16 @@ const {
     postLeave,
     getAllLeave,
     deletLeave,
-    changeStatus
+    changeStatus,
+    getLeaves
 } = require('../../controllers/api/leave.controller');
 
 const router = express.Router();
 
 router.post('/:id', postLeave);
 router.get('/:id', getAllLeave);
-router.patch('/:id',changeStatus)
+router.get('/', getLeaves)
+router.patch('/:id', changeStatus)
 router.delete('/:id', deletLeave);
 
 module.exports = router;

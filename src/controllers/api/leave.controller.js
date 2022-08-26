@@ -57,6 +57,26 @@ const getAllLeave = async (req, res, next) => {
 
 }
 
+const getLeaves = async (req, res, next) => {
+    let { find: sortField } = req.query;
+
+    try {
+        const leaves = await LeaveService.getLeaves(sortField);
+        res.status(201).json({
+            status: 'success',
+            data: leaves
+        });
+
+    }
+    catch (error) {
+        const httpError = new HttpError(error.message, 400);
+
+        next(httpError);
+    }
+
+}
+
+
 const deletLeave = async (req, res, next) => {
     const id = req.params.id;
 
@@ -77,5 +97,6 @@ module.exports = {
     postLeave,
     getAllLeave,
     deletLeave,
+    getLeaves,
     changeStatus
 }
