@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken');
 const {
     addUser,
     getUserByEmail,
-    checkPassword
+    checkPassword,
+    getUser
 } = require('../../services/users.service')
 
 const register = async (req, res, next) => {
@@ -83,7 +84,21 @@ const login = async (req, res, next) => {
 
 };
 
+const getUsers = async (req, res, next) => {
+
+    const holiday = await getUser()
+    console.log(req.cookies);
+    res.status(201).json({
+        status: 'success',
+        data: holiday
+    });
+
+}
+
+
+
 module.exports = {
     register,
-    login
+    login,
+    getUsers
 }

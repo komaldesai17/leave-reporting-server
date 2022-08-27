@@ -38,6 +38,22 @@ const getUserByEmail = async (email) => {
     return user;
 };
 
+const getUser = async (email) => {
+    const user = await User.find(
+        {
+
+        }, { email: 1 }
+    );
+
+    if (user === null) {
+        const error = new Error('Bad Credentials');
+        error.type = 'BadCredentials';
+        throw error;
+    }
+
+    return user;
+};
+
 const checkPassword = async (user, plainTextPassword) => {
     let isMatch;
 
@@ -62,5 +78,6 @@ const checkPassword = async (user, plainTextPassword) => {
 module.exports = {
     addUser,
     getUserByEmail,
-    checkPassword
+    checkPassword,
+    getUser
 }
