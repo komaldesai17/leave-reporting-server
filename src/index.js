@@ -1,10 +1,9 @@
-require( 'dotenv' ).config();
+require('dotenv').config();
 require('./init');
 
 const express = require('express');
-var cookieParser = require('cookie-parser');
 const app = express();
-
+const morgan = require('morgan');
 const cors = require('cors')
 
 
@@ -24,7 +23,9 @@ const leaveApiRouter = require('./routes/api/leave.routes')
 //app.get('/', (req, res) => res.send('Hello World!'));
 
 app.use(express.json());
-app.use(cookieParser());
+app.use(morgan('combined'));
+app.use(express.urlencoded());
+
 app.use('/api/holidays', holidayApiRouter);
 app.use('/api/user', userApiRouter);
 
