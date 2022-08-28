@@ -4,7 +4,7 @@ const leaveSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required:true
+        required: true
     },
     startDate: {
         type: Date,
@@ -31,4 +31,4 @@ const leaveSchema = new mongoose.Schema({
 });
 
 
-mongoose.model('Leave',leaveSchema)
+mongoose.model('Leave', leaveSchema)

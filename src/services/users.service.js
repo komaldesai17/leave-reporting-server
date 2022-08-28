@@ -38,7 +38,7 @@ const getUserByEmail = async (email) => {
     return user;
 };
 
-const getUser = async (email) => {
+const getUser = async () => {
     const user = await User.find(
         {
 

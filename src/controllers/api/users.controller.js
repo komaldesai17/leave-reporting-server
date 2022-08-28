@@ -89,7 +89,6 @@ const getUsers = async (req, res, next) => {
     const holiday = await getUser()
     console.log(req.cookies);
     res.status(201).json({
-        status: 'success',
         data: holiday
     });
 
