@@ -22,8 +22,9 @@ const getHoliday = async () => {
 
 
 const deleteHoliday = async (description) => {
-    const removeHoliday = await Holiday.deleteOne({ title: `${description}`});
-    if (removeHoliday === null) {
+    const removeHoliday = await Holiday.deleteOne({ title: `${description}` });
+
+    if ((removeHoliday === null) || (removeHoliday.deletedCount === 0)) {
         const error = new Error("No such Holiday");
         error.type = "NotFound";
         throw error;
