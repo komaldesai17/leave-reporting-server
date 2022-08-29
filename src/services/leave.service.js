@@ -13,18 +13,24 @@ const addLeave = async (leave) => {
     }
 }
 
-const getLeaves = async (sortField) => {
+const getLeaves = async (page, sortField) => {
     try {
-        const leaves = await Leave.find();
+        const query = Leave.find();
 
         if (sortField) {
 
             const leaves = await Leave.find({
                 status: sortField
             });
-            return leaves;
+
+            return leaves
+
         }
-        return leaves
+
+        query.skip(5 * (page - 1)).limit(5);
+        const workshop = await query.exec()
+        return workshop;
+
 
     }
     catch (error) {
@@ -42,13 +48,13 @@ const getLeaves = async (sortField) => {
     }
 }
 
-const getAllLeave = async (userId, sortField) => {
+const getAllLeave = async (page, userId, sortField) => {
 
     let user;
     try {
         user = await User.findById(userId, sortField);
         if (user) {
-            const query = await Leave.find({
+            const query = Leave.find({
                 user: userId
             });
 
@@ -60,8 +66,10 @@ const getAllLeave = async (userId, sortField) => {
                 });
                 return leaves;
             }
-            return query;
 
+            query.skip(5 * (page-1)).limit(5)
+            const workshop = await query.exec();
+            return workshop
         }
 
     } catch (error) {
