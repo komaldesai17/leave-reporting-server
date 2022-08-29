@@ -8,7 +8,7 @@ const {
     getAllLeave,
     deletLeave,
     changeStatus,
-    getLeaves
+    getLeaves,
 } = require('../../controllers/api/leave.controller');
 
 const router = express.Router();

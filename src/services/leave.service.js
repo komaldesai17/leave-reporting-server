@@ -67,7 +67,7 @@ const getAllLeave = async (page, userId, sortField) => {
                 return leaves;
             }
 
-            query.skip(5 * (page-1)).limit(5)
+            query.skip(5 * (page - 1)).limit(5)
             const workshop = await query.exec();
             return workshop
         }
@@ -118,10 +118,14 @@ const changestatus = async (id, status) => {
     }
 }
 
+
+
+
+
 module.exports = {
     addLeave,
     getAllLeave,
     changestatus,
     deleteLeave,
-    getLeaves
+    getLeaves,
 }

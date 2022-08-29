@@ -19,7 +19,7 @@ connect();
 const holidayApiRouter = require('./routes/api/holidays.routes')
 const userApiRouter = require('./routes/api/users.routes')
 const leaveApiRouter = require('./routes/api/leave.routes')
-
+const DashRouter = require('./routes/api/dashboard.routes')
 //app.get('/', (req, res) => res.send('Hello World!'));
 
 app.use(express.json());
@@ -30,6 +30,8 @@ app.use('/api/holidays', holidayApiRouter);
 app.use('/api/user', userApiRouter);
 
 app.use('/api/leave', leaveApiRouter)
+app.use('/api/dashbord', DashRouter)
+
 
 const PORT = process.env.PORT || 3000;
 
