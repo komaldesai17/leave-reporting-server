@@ -88,7 +88,7 @@ const getAllLeave = async (page, userId, sortField) => {
 
 const deleteLeave = async (id) => {
     const deletedLeave = await Leave.findByIdAndRemove(id);
-    if (deletedLeave === null) {
+    if ((deletedLeave === null) || (deleteLeave.deletedCount === 0)) {
         const error = new Error("No such leave");
         error.type = "NotFound";
         throw error;

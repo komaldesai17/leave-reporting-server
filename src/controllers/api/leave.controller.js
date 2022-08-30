@@ -10,7 +10,6 @@ const postLeave = async (req, res, next) => {
             status: 'success',
             data: updatedLeave,
         });
-
     }
     catch (error) {
         const httpError = new HttpError(error.message, 400);

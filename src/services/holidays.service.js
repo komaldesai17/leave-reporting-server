@@ -8,7 +8,7 @@ const addHoliday = async (holiday) => {
 
         return insertedHoliday;
     } catch (error) {
-        console.log(error.message)
+        throw error
     }
 }
 

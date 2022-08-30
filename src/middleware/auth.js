@@ -1,14 +1,13 @@
-const jwt = require( 'jsonwebtoken' );
+const jwt = require('jsonwebtoken');
 
-const authenticate = ( req, res, next ) => {
-    const token = req.header( 'Authorization' );
-    
-    jwt.verify( token, process.env.JWT_SECRET, function( err, claims ) {
-        if( err ) {
-            const error = new Error( 'Bad credentials' );
-            // invalid user
+const authenticate = (req, res, next) => {
+    const token = req.header('Authorization');
+
+    jwt.verify(token, process.env.JWT_SECRET, function (err, claims) {
+        if (err) {
+            const error = new Error('Bad credentials');
             error.status = 401;
-            next( error );
+            next(error);
             return;
         }
 
@@ -17,15 +16,16 @@ const authenticate = ( req, res, next ) => {
     });
 };
 
-const authorize = ( allowedRoles ) => { // when called, this returns the middleware
-    return ( req, res, next ) => { // this is the actual middleware
+const authorize = (allowedRoles) => { // when called, this returns the middleware
+    return (req, res, next) => { // this is the actual middleware
         const { claims } = res.locals;
+        console.log(res.locals)
 
-        if( !allowedRoles.includes( claims.role ) ) {
-            const error = new Error( 'Unauthorized' );
+        if (!allowedRoles.includes(claims.role)) {
+            const error = new Error('Unauthorized');
             // for a valid user, but one who has insufficient privileges (send 403)
             error.status = 403;
-            next( error );
+            next(error);
             return;
         }
 
