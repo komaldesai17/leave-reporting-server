@@ -20,7 +20,7 @@ const postLeave = async (req, res, next) => {
 
 const changeStatus = async (req, res, next) => {
     const leave = req.params.id;
-    const status = req.body
+    const status = { ...req.body }
     try {
         const leaves = await LeaveService.changestatus(leave, status);
         res.status(201).json({

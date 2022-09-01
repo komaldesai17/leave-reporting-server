@@ -21,7 +21,7 @@ const getLeaves = async (page, sortField) => {
 
             const leaves = await Leave.find({
                 status: sortField
-            });
+            }).skip(5 * (page - 1)).limit(5).exec();
 
             return leaves
 
@@ -54,22 +54,23 @@ const getAllLeave = async (page, userId, sortField) => {
     try {
         user = await User.findById(userId, sortField);
         if (user) {
-            const query = Leave.find({
-                user: userId
-            });
-
             if (sortField) {
-
-                const leaves = await Leave.find({
+                const query = await Leave.find({
                     user: userId,
                     status: sortField
+                }).skip(5 * (page - 1)).limit(5).exec();
+                return query
+            }
+            else {
+                const query = Leave.find({
+                    user: userId
                 });
-                return leaves;
+
+                query.skip(5 * (page - 1)).limit(5)
+                const workshop = await query.exec();
+                return workshop
             }
 
-            query.skip(5 * (page - 1)).limit(5)
-            const workshop = await query.exec();
-            return workshop
         }
 
     } catch (error) {
