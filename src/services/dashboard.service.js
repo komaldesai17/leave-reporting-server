@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const User = mongoose.model("User")
 const Leave = mongoose.model("Leave");
-
 const dashbord = async (userId) => {
 
     let user;

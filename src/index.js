@@ -7,6 +7,8 @@ const morgan = require('morgan');
 const cors = require('cors')
 
 
+
+
 app.use(cors({
     origin: `http://localhost:8081`,
     optionsSuccessStatus: 200,
@@ -22,6 +24,15 @@ const leaveApiRouter = require('./routes/api/leave.routes')
 const DashRouter = require('./routes/api/dashboard.routes')
 //app.get('/', (req, res) => res.send('Hello World!'));
 
+
+const logger = require( './middleware/logger' );
+const {
+    apiNotFound,
+    pageNotFound,
+    errorHandler
+} = require( './middleware/error' );
+
+
 app.use(express.json());
 app.use(morgan('combined'));
 app.use(express.urlencoded());
@@ -32,6 +43,10 @@ app.use('/api/user', userApiRouter);
 app.use('/api/leave', leaveApiRouter)
 app.use('/api/dashbord', DashRouter)
 
+
+app.use( '/api', apiNotFound );
+app.use( pageNotFound );
+app.use( errorHandler );
 
 const PORT = process.env.PORT || 3000;
 

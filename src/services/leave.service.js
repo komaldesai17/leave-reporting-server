@@ -1,15 +1,19 @@
 const mongoose = require("mongoose");
 const User = mongoose.model("User")
 const Leave = mongoose.model("Leave");
+const moment = require('moment');
 
 
 const addLeave = async (leave) => {
     try {
-        const insertedHoliday = await Leave.create(leave);
-
-        return insertedHoliday;
+        const numWorkDays = getNumWorkDays(leave.startDate, leave.endDate)
+        leave.days = numWorkDays
+        if (leave) {
+            const insertedHoliday = await Leave.create(leave);
+            return insertedHoliday;
+        }
     } catch (error) {
-        console.log(error.message)
+        console.log(error)
     }
 }
 
@@ -120,8 +124,17 @@ const changestatus = async (id, status) => {
 }
 
 
-
-
+const getNumWorkDays =  (startDate, endDate) => {
+    const day = moment(startDate);
+    let businessdays = 0;
+    while (day.isSameOrBefore(endDate, 'day')) {
+        if (day.day() !== 0 && day.day() !== 6) {
+            businessdays++;
+        }
+        day.add(1, 'd');
+    }
+    return businessdays;
+}
 
 module.exports = {
     addLeave,
@@ -129,4 +142,5 @@ module.exports = {
     changestatus,
     deleteLeave,
     getLeaves,
+    getNumWorkDays
 }

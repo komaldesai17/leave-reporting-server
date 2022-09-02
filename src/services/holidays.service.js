@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const Holiday = mongoose.model("Holiday");
-
+const { getNumWorkDays } = require('./leave.service')
 
 const addHoliday = async (holiday) => {
     try {
-        const insertedHoliday = await Holiday.create(holiday);
+          const insertedHoliday = await Holiday.create(holiday);
 
         return insertedHoliday;
     } catch (error) {
