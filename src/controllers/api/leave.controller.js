@@ -39,14 +39,14 @@ const changeStatus = async (req, res, next) => {
 
 const getAllLeave = async (req, res, next) => {
     const leave = req.params.id;
-    let { page, find: sortField } = req.query;
+    let { page, find: sortField, start: start, end: end } = req.query;
     if (page) {
         page = +page;
     } else {
         page = 1;
     }
     try {
-        const leaves = await LeaveService.getAllLeave(page, leave, sortField);
+        const leaves = await LeaveService.getAllLeave(page, leave, sortField, start, end);
         res.status(201).json({
             status: 'success',
             data: leaves

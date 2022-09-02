@@ -25,13 +25,13 @@ const getLeaves = async (page, sortField) => {
 
             const leaves = await Leave.find({
                 status: sortField
-            }).skip(5 * (page - 1)).limit(5).exec();
+            }).skip(4 * (page - 1)).limit(4).exec();
 
             return leaves
 
         }
 
-        query.skip(5 * (page - 1)).limit(5);
+        query.skip(4 * (page - 1)).limit(4);
         const workshop = await query.exec()
         return workshop;
 
@@ -52,17 +52,27 @@ const getLeaves = async (page, sortField) => {
     }
 }
 
-const getAllLeave = async (page, userId, sortField) => {
-
+const getAllLeave = async (page, userId, sortField, start, end) => {
     let user;
     try {
-        user = await User.findById(userId, sortField);
+        user = await User.findById(userId);
         if (user) {
             if (sortField) {
                 const query = await Leave.find({
                     user: userId,
                     status: sortField
-                }).skip(5 * (page - 1)).limit(5).exec();
+                }).skip(4 * (page - 1)).limit(4).exec();
+                return query
+            }
+            if (start && end ) {
+                const query = await Leave.find(
+                    {  user: userId,
+                        startDate: {
+                            $gte: new Date(start),
+                            $lte: new Date(end)
+                        }
+                    }
+                ).skip(4 * (page - 1)).limit(4).exec();
                 return query
             }
             else {
@@ -70,7 +80,7 @@ const getAllLeave = async (page, userId, sortField) => {
                     user: userId
                 });
 
-                query.skip(5 * (page - 1)).limit(5)
+                query.skip(4 * (page - 1)).limit(4)
                 const workshop = await query.exec();
                 return workshop
             }
@@ -123,8 +133,7 @@ const changestatus = async (id, status) => {
     }
 }
 
-
-const getNumWorkDays =  (startDate, endDate) => {
+const getNumWorkDays = (startDate, endDate) => {
     const day = moment(startDate);
     let businessdays = 0;
     while (day.isSameOrBefore(endDate, 'day')) {
@@ -141,6 +150,5 @@ module.exports = {
     getAllLeave,
     changestatus,
     deleteLeave,
-    getLeaves,
-    getNumWorkDays
+    getLeaves
 }
