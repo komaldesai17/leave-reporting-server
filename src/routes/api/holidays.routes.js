@@ -1,5 +1,8 @@
 const express = require('express');
-
+const {
+    authorize,
+    authenticate
+} = require('../../middleware/auth');
 const {
     postHoliday,
     getHoliday,
@@ -11,8 +14,8 @@ const router = express.Router();
 
 router.get('/', getHoliday);
 
-router.post('/', postHoliday);
+router.post('/',authenticate,authorize(['admin']),postHoliday);
 
-router.delete('/:description', deleteHoliday);
+router.delete('/:description',authenticate,authorize(['admin']), deleteHoliday);
 
 module.exports = router;
