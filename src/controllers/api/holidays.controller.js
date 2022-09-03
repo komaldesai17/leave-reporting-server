@@ -1,4 +1,4 @@
-const HolidayService = require('../../services/holidays.service')
+const HolidayService = require('../../services/holiday.service')
 
 
 const postHoliday = async (req, res, next) => {
@@ -50,5 +50,5 @@ const deleteHoliday = async (req, res, next) => {
 module.exports = {
     postHoliday,
     getHoliday,
-    deleteHoliday,
+    deleteHoliday
 }

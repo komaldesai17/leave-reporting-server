@@ -22,4 +22,4 @@ const holidaySchema = new mongoose.Schema({
 
     })
 
-mongoose.model('Holiday', holidaySchema)
+mongoose.model('Holidays', holidaySchema)

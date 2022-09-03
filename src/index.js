@@ -1,21 +1,27 @@
 require('dotenv').config();
 require('./init');
 
+require('./data/init');
+
+const path = require( 'path' );
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const cors = require('cors')
-
-
-
-
-app.use(cors({
+/*
+{
     origin: `http://localhost:8081`,
     optionsSuccessStatus: 200,
     credentials: true,
-}))
-const { connect } = require('./data/db');
-connect();
+}
+*/
+if (process.env.NODE_ENV === 'development') {
+    app.use(cors());
+}
+
+app.use( express.static(path.join(process.cwd(), 'public')))
+/*const { connect } = require('./data/db');
+connect();*/
 
 
 const holidayApiRouter = require('./routes/api/holidays.routes')
@@ -57,3 +63,5 @@ app
     .on('error', error => { // server.on( ... )
         console.error(error.message);
     });
+
+    module.exports= app

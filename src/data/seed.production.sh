@@ -1,0 +1,1 @@
+mongoimport --uri="mongodb+srv://demoadmin:Password123@cluster0.zzbvhhg.mongodb.net/leavesreportDB?retryWrites=true&w=majority&ssl=true&authSource=admin" --collection=holidays --file="seed/holidays.json" --jsonArray
