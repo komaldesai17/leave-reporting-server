@@ -1,4 +1,6 @@
 //const path = require('path');
+require('../../models/User');
+
 const jwt = require('jsonwebtoken');
 const {
     addUser,

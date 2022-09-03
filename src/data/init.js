@@ -25,3 +25,4 @@ mongoose.connection.on('error', error => {
 mongoose.connection.on('open', function () {
     console.log(`Connected to database ${DB_NAME}`)
 })
+

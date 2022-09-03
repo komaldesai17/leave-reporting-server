@@ -1,3 +1,5 @@
+require('../../models/Leave');
+
 const LeaveService = require('../../services/leave.service')
 
 const postLeave = async (req, res, next) => {

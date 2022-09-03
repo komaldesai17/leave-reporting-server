@@ -1,3 +1,5 @@
+require('../../models/Holidays');
+
 const HolidayService = require('../../services/holiday.service')
 
 
