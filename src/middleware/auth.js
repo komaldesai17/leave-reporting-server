@@ -19,7 +19,7 @@ const authenticate = (req, res, next) => {
 const authorize = (allowedRoles) => { // when called, this returns the middleware
     return (req, res, next) => { // this is the actual middleware
         const { claims } = res.locals;
-        console.log(res.locals)
+        //console.log(res.locals)
 
         if (!allowedRoles.includes(claims.role)) {
             const error = new Error('Unauthorized');
