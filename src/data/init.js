@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 mongoose.set('returnOriginal', false)
 
 const { NODE_ENV, DB_USER, DB_NAME,DB_PASSWORD, DB_HOST,  } = process.env;
-const connectionStr = NODE_ENV === `development` ? `mongodb://${DB_HOST}/${DB_NAME}` : `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`;
+const connectionStr = NODE_ENV === `development` ? `mongodb://${DB_HOST}/${DB_NAME}` : `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority&ssl=true&authSource=admin`;
 
 console.log(connectionStr);
 
