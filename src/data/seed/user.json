@@ -2,21 +2,11 @@
 [
     {
         "_id": {
-            "oid": "200000000000000000000001"
+            "$oid": "200000000000000000000001"
         },
-        "email": "mark.smith@fynd.com",
+        "email": "marksmith@fynd.com",
         "name": "Mark Smith",
         "password": "Password123#",
         "role":"general"
-    },
-    {
-        "_id": {
-            "oid": "200000000000000000000002"
-        },
-        "email": "mark.smith@fynd.com",
-        "name": "Mark Smith",
-        "password": "Password123#",
-        "role":"general"
-
     }
 ]
