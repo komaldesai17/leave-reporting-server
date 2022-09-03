@@ -57,7 +57,7 @@ const login = async (req, res, next) => {
             // some problem in generating JWT
             if (error) {
                 const httpError = new HttpError("Internal Server Error", 500);
-                next(httpError, console.log(process.env.JWT_SECRET));
+                next(httpError, console.log(error));
             }
 
             res.json({
@@ -87,7 +87,6 @@ const login = async (req, res, next) => {
 const getUsers = async (req, res, next) => {
 
     const holiday = await getUser()
-    console.log(req.cookies);
     res.status(201).json({
         data: holiday
     });

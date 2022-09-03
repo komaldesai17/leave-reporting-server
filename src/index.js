@@ -3,7 +3,7 @@ require('./init');
 
 require('./data/init');
 
-const path = require( 'path' );
+const path = require('path');
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
@@ -19,9 +19,10 @@ if (process.env.NODE_ENV === 'development') {
     app.use(cors());
 }
 
-app.use( express.static(path.join(process.cwd(), 'public')))
-/*const { connect } = require('./data/db');
-connect();*/
+app.use(express.static(path.join(process.cwd(), 'public')))
+
+//const { connect } = require('./data/db');
+//connect();
 
 
 const holidayApiRouter = require('./routes/api/holidays.routes')
@@ -31,12 +32,12 @@ const DashRouter = require('./routes/api/dashboard.routes')
 //app.get('/', (req, res) => res.send('Hello World!'));
 
 
-const logger = require( './middleware/logger' );
+//const logger = require( './middleware/logger' );
 const {
     apiNotFound,
     pageNotFound,
     errorHandler
-} = require( './middleware/error' );
+} = require('./middleware/error');
 
 
 app.use(express.json());
@@ -50,9 +51,9 @@ app.use('/api/leave', leaveApiRouter)
 app.use('/api/dashbord', DashRouter)
 
 
-app.use( '/api', apiNotFound );
-app.use( pageNotFound );
-app.use( errorHandler );
+app.use('/api', apiNotFound);
+app.use(pageNotFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 
@@ -64,4 +65,4 @@ app
         console.error(error.message);
     });
 
-    module.exports= app
+module.exports = app

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Holiday = mongoose.model('Holidays')
+const Holiday = mongoose.model('Holiday')
 const addHoliday = async (holiday) => {
     try {
         const insertedHoliday = await Holiday.create(holiday);
