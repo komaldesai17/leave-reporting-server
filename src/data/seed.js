@@ -2,7 +2,7 @@ const { execSync } = require('child_process');
 const DB_NAME = 'leavesreportDB';
 
 try {
-    //execSync(`mongoimport --db ${DB_NAME} --collection holidays --file "${process.cwd()}/src/data/seed/holidays.json" --jsonArray`);
+    execSync(`mongoimport --db ${DB_NAME} --collection holidays --file "${process.cwd()}/src/data/seed/holidays.json" --jsonArray`);
     execSync(`mongoimport --db ${DB_NAME} --collection leaves --file "${process.cwd()}/src/data/seed/leave.json" --jsonArray`);
     //execSync(`mongoimport --db ${DB_NAME} --collection users --file "${process.cwd()}/src/data/seed/user.json" --jsonArray`);
 
