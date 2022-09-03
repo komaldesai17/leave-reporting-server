@@ -42,7 +42,7 @@ const {
 
 app.use(express.json());
 app.use(morgan('combined'));
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:true}));
 
 app.use('/api/holidays', holidayApiRouter);
 app.use('/api/user', userApiRouter);
