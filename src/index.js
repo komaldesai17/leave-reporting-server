@@ -15,9 +15,22 @@ const cors = require('cors')
     credentials: true,
 }
 */
-if (process.env.NODE_ENV === 'development') {
-    app.use(cors());
+const env = process.env.NODE_ENV;
+let origin = 'http://localhost:3001'
+
+
+if( env === 'production' ) {
+    origin = [
+        'https://leave-reporting-demo.herokuapp.com/'
+    ];
 }
+
+app.use(cors(
+    {
+        origin,
+        optionsSuccessStatus: 200
+    }
+));
 
 app.use(express.static(path.join(process.cwd(), 'public')))
 
