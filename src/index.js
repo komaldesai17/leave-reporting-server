@@ -52,7 +52,7 @@ app.use('/api/dashbord', DashRouter)
 
 
 app.use('/api', apiNotFound);
-app.use(pageNotFound);
+//app.use(pageNotFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
