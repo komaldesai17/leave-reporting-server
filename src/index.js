@@ -39,6 +39,12 @@ const DashRouter = require('./routes/api/dashboard.routes')
 //app.get('/', (req, res) => res.send('Hello World!'));
 
 
+
+
+app.set( 'title', 'Workshops App' );
+
+app.set( 'view engine', 'ejs' );
+app.set( 'views', path.join( process.cwd(), 'views' ) );
 //const logger = require( './middleware/logger' );
 const {
     apiNotFound,

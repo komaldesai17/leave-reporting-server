@@ -3,7 +3,9 @@ const apiNotFound = ( req, res, next ) => {
 };
 
 const pageNotFound = ( req, res, next ) => {
-    res.render( 'app');
+    res.render( 'page-not-found', {
+        title: req.app.get( 'title' )
+    });
 };
 
 const errorHandler = ( error, req, res, next ) => {
