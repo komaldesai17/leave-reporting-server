@@ -8,13 +8,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const cors = require('cors')
-/*
-{
-    origin: `http://localhost:8081`,
-    optionsSuccessStatus: 200,
-    credentials: true,
-}
-*/
+
 const env = process.env.NODE_ENV;
 let origin = 'http://localhost:3001'
 
@@ -47,8 +41,8 @@ const DashRouter = require('./routes/api/dashboard.routes')
 
 //const logger = require( './middleware/logger' );
 const {
-    //apiNotFound,
-    //pageNotFound,
+    apiNotFound,
+    pageNotFound,
     errorHandler
 } = require('./middleware/error');
 
@@ -64,8 +58,8 @@ app.use('/api/leave', leaveApiRouter)
 app.use('/api/dashbord', DashRouter)
 
 
-//app.use('/api', apiNotFound);
-//app.use(pageNotFound);
+app.use('/api', apiNotFound);
+app.use(pageNotFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
