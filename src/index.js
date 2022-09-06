@@ -34,8 +34,8 @@ const DashRouter = require('./routes/api/dashboard.routes')
 
 //const logger = require( './middleware/logger' );
 const {
-    apiNotFound,
-    pageNotFound,
+    //apiNotFound,
+    //pageNotFound,
     errorHandler
 } = require('./middleware/error');
 
@@ -51,7 +51,7 @@ app.use('/api/leave', leaveApiRouter)
 app.use('/api/dashbord', DashRouter)
 
 
-app.use('/api', apiNotFound);
+//app.use('/api', apiNotFound);
 //app.use(pageNotFound);
 app.use(errorHandler);
 
